@@ -91,6 +91,6 @@ Object.keys(embeds).forEach((pings) => {
   )
 })
 
-require('fs').writeFileSync('runtimes.txt', parseInt(require('fs').readFileSync('runtimes.txt', { encoding: 'utf-8' })) + 1);
+require('fs').writeFileSync('runtimes.txt', `${parseInt(require('fs').readFileSync('runtimes.txt', { encoding: 'utf-8' })) + 1}`);
 
 Promise.all(promises).then(()=>webhook.destroy());

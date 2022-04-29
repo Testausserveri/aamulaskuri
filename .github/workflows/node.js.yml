@@ -38,3 +38,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: node app.js
+    - name: Configure Git and add files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "tj[bot]"
+        git add -A
+    - name: Commit
+      id: can_commit
+      run: |
+        commit_message=$(git commit -m "Updated aamu runtimes" -a | tr -d '\n' || true)
+        echo "::set-output name=commit_message::$commit_message"
+    - name: Push or leave
+      id: nothing_committed
+      if: false == contains(steps.can_commit.outputs.commit_message, 'nothing to commit')
+      run: git push origin master

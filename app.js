@@ -20,14 +20,16 @@ const getMessage = (startDate, serveDays, msg = "") => {
   const serveTime = 24 * 60 * 60 * 1000 * serveDays;
   const trainDay = Math.ceil(serveDays / 2); // Aamujuna kääntyy
   const endDate = new Date(startDate.getTime() + serveTime);
-  if(diff(startDate) > 0) {
-    msg += `Palveluksen alkuun ${diff(startDate)} aamua.`
+  if(diff(startDate) > 0 && diff(startDate) % 7 == 0) {
+    msg += `Palveluksen alkuun ${diff(startDate)} aamua eli ${diff(startDate) / 7} viikkoa :military_helmet:`
   } else if(diff(startDate) == 0) {
-    msg += `TJ: Palvelus alkaa tänään. Aamukasassa ${diff(endDate)} aamua.`;
+    msg += `TJ: Palvelus alkaa tänään. Aamukasassa ${diff(endDate)} aamua :military_helmet:`;
   } else if(diff(endDate) === trainDay) {
-    msg += `TJ: Aamujuna kääntyy. Aamuja jäljellä ${diff(endDate)}`
+    msg += `TJ: Aamujuna kääntyy. Aamuja jäljellä ${diff(endDate)} :steam_locomotive::military_helmet: `
+  } else if (diff(endDate) > 0 && diff(endDate) > 7) {
+    msg += `TJ: Aamuja jäljellä ${diff(endDate)} :military_helmet: `;
   } else if (diff(endDate) > 0) {
-    msg += `TJ: Aamuja jäljellä ${diff(endDate)}.`;
+    msg += `TJ: Aamuja jäljellä ${diff(endDate)} LOPPUKIRI! <:toihin_hymio:800454454415589386>:military_helmet:`;
   } else if (diff(endDate) == 0) {
     msg += `Reservin aurinko paistaa :sun_with_face:`;
   } else {
@@ -63,7 +65,7 @@ Object.keys(config.subscribers).forEach((entry) => {
     `${message347}\n${message255}\n${message165}`
   )
   .setColor('#36771c')
-  .setURL('https://www.youtube.com/watch?v=Bc0IpLN-wGE')
+  .setURL('https://www.youtube.com/watch?v=Bc0IpLN-wGE');
   embeds[`${days["347"].join(' ')} ${days["255"].join(' ')} ${days["165"].join(' ')}`] = embed;
 })
 // Send message
@@ -88,5 +90,7 @@ Object.keys(embeds).forEach((pings) => {
     sendEmbed(pings, embed)
   )
 })
+
+require('fs').writeFileSync('runtimes.txt', parseInt(require('fs').readFileSync('runtimes.txt', { encoding: 'utf-8' })) + 1);
 
 Promise.all(promises).then(()=>webhook.destroy());

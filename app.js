@@ -22,6 +22,8 @@ const getMessage = (startDate, serveDays, msg = "") => {
   const endDate = new Date(startDate.getTime() + serveTime);
   if(diff(startDate) > 0 && diff(startDate) % 7 == 0) {
     msg += `Palveluksen alkuun ${diff(startDate)} aamua eli ${diff(startDate) / 7} viikkoa :military_helmet:`
+  } else if (diff(startDate) > 0) {
+    return ''; // ;)
   } else if(diff(startDate) == 0) {
     msg += `TJ: Palvelus alkaa tänään. Aamukasassa ${diff(endDate)} aamua :military_helmet:`;
   } else if(diff(endDate) === trainDay) {

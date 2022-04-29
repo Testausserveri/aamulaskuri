@@ -55,9 +55,9 @@ Object.keys(config.subscribers).forEach((entry) => {
   ) {
     return;
   }
-  const message347 = getMessage(startDate, 347, `${days["347"].join(' ')}\n**Palvelusaika 347**\n`);
-  const message255 = getMessage(startDate, 255, `${days["255"].join(' ')}\n**Palvelusaika 255**\n`);
-  const message165 = getMessage(startDate, 165, `${days["165"].join(' ')}\n**Palvelusaika 165**\n`);
+  const message347 = days["347"].length === 0 ? '' : getMessage(startDate, 347, `**Palvelusaika 347**\n${days["347"].join(' ')}\n`);
+  const message255 = days["255"].length === 0 ? '' : getMessage(startDate, 255, `**Palvelusaika 255**\n${days["255"].join(' ')}\n`);
+  const message165 = days["165"].length === 0 ? '' : getMessage(startDate, 165, `**Palvelusaika 165**\n${days["165"].join(' ')}\n`);
   if (message347 === '') {
     return;
   }

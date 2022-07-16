@@ -13,7 +13,7 @@ const webhook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WE
 const config = require('./config.json');
 
 const diff = (to, from = Date.now()) => {
-  return Math.ceil((to.getTime() - from)/(24 * 60 * 60 * 1000))
+  return Math.ceil((to.getTime() - from)/(24 * 60 * 60 * 1000)) - 1
 }
 
 const getMessage = (startDate, serveDays, msg = "") => {

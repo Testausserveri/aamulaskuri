@@ -21,6 +21,8 @@ on:
 env:
   WEBHOOK_ID: ${{ secrets.WEBHOOK_ID }}
   WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+  WEBHOOK_THREAD: ${{ secrets.WEBHOOK_THREAD }}
+  WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
   
 jobs:
   bot:

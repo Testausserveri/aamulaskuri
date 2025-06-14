@@ -79,6 +79,7 @@ const promises = [];
 const sendEmbed = async (message, embed) => {
   await webhook.send(
     {
+      threadId: process.env.WEBHOOK_THREAD,
       username: 'Inttilaskuri',
       content: message,
       embeds: [embed],

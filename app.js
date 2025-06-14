@@ -8,7 +8,9 @@ process.env.TZ = 'Europe/Helsinki'
 const Discord = require('discord.js')
 
 // Create WebhookClient
-const webhook = new Discord.WebhookClient(process.env.WEBHOOK_ID, process.env.WEBHOOK_SECRET);
+const webhook = new Discord.WebhookClient({
+  url: process.env.WEBHOOK_URL,
+});
 
 const config = require('./config.json');
 
@@ -61,7 +63,7 @@ Object.keys(config.subscribers).forEach((entry) => {
   if (message347 === '' && message255 == '' && message165 == '') {
     return;
   }
-  const embed = new Discord.MessageEmbed()
+  const embed = new Discord.EmbedBuilder()
   .setTitle(`Aamulaskuri > ${entry}`)
   .setDescription(
     `${message347}\n${message255}\n${message165}`
@@ -76,9 +78,9 @@ const promises = [];
 
 const sendEmbed = async (message, embed) => {
   await webhook.send(
-    message,
     {
       username: 'Inttilaskuri',
+      content: message,
       embeds: [embed],
       avatarURL: 'https://www.tuntsa.fi/kauppa/wp-content/uploads/2018/02/maastokangas_malli-1.jpg',
     }
